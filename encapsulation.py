@@ -9,7 +9,8 @@ class BankAccount:
     # deposite method
     def deposit(self,amount):
         self.__balance += amount
-    # deposite method
+
+    # widrowl method
     def withdraw(self,amount):
         if amount > self.__balance:
             print("Amount is not availabel")
@@ -22,9 +23,9 @@ class BankAccount:
     def __str__(self):
         return f"Name={self.name}, balance={self.__balance}"
 b = BankAccount("shubham",200)
-b.deposit(-8500)
+b.deposit(800)
 print(b.name)
 print(b.show_balance())
-b.withdraw(200)
-print(b.show_balance())
-print(b)
+# b.withdraw(200)
+# print(b.show_balance())
+# print(b)
