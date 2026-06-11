@@ -3,7 +3,15 @@ class Time:
         self.hour = hour
         self.min = min
 
-        
+    def differnece(self,other):
+        total1 = self.hour *60 + self.min
+        total2 = other.hour * 60 + other.min
+
+        diff = abs(total1-total2)
+        # hours = diff // 60
+        # mins = diff % 60
+        return f"{diff} Minutes" 
+
             
 
     def __str__(self):
@@ -31,5 +39,8 @@ class Time:
 
 
 
-t = Time(12,2)
-print(t)
+t1 = Time(10,2)
+t2 = Time(17,5)
+print(t1)
+print(t2)
+print(t1.differnece(t2))
