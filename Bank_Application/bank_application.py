@@ -77,7 +77,9 @@ class CurrentAccount(BankAccount):
         self.overdraft_limit = overdraft_limit
 
     def withdraw(self, ammount):
+
         availabel_balance =(self.balance.total + self.overdraft_limit.total)
+
         if ammount.total <= availabel_balance:
             self.balance.total -= ammount.total
         else:
@@ -91,26 +93,144 @@ class CurrentAccount(BankAccount):
         )         
 
 
+bank = None
 
-holder = AccountHolder(
-    "Shubham",
-    24,
-    "Varanasi",
-    "9022151378",
-    "Cashier"
-)
+while True:
 
-currency = Currency(100,15)
+    print("\n===== BANK MENU =====")
+    print("1. Create Account")
+    print("2. Deposit")
+    print("3. Withdraw")
+    print("4. Check Balance")
+    print("5. Exit")
 
-bank = SavingAccount(
-    holder,
-    "123456789",
-    7,
-    currency,
-    "Saving Account"
-)
+    choice = int(input("Enter Choice: "))
 
+    match choice:
+
+        case 1:
+
+            name = input("Enter Name: ")
+            age = int(input("Enter Age: "))
+            address = input("Enter Address: ")
+            phone = input("Enter Phone Number: ")
+            profession = input("Enter Profession: ")
+
+            holder = AccountHolder(
+                name,
+                age,
+                address,
+                phone,
+                profession
+            )
+
+            print("\nSelect Account Type")
+            print("1. Saving Account")
+            print("2. Current Account")
+
+            account_choice = int(input("Enter Choice: "))
+
+            account_no = input("Enter Account Number: ")
+
+            rupees = int(input("Enter Initial Rupees: "))
+            paise = int(input("Enter Initial Paise: "))
+
+            balance = Currency(rupees, paise)
+
+            if account_choice == 1:
+
+                bank = SavingAccount(
+                    holder,
+                    account_no,
+                    7,
+                    balance,
+                    "Saving Account"
+                )
+
+            elif account_choice == 2:
+
+                overdraft_rupees = int(
+                    input("Enter Overdraft Rupees: ")
+                )
+
+                overdraft = Currency(
+                    overdraft_rupees,
+                    0
+                )
+
+                bank = CurrentAccount(
+                    holder,
+                    account_no,
+                    0,
+                    balance,
+                    overdraft
+                )
+
+            print("\nAccount Created Successfully")
+
+        case 2:
+
+            if bank is None:
+                print("Create Account First")
+                continue
+
+            rupees = int(input("Enter Deposit Rupees: "))
+            paise = int(input("Enter Deposit Paise: "))
+
+            bank.deposit(
+                Currency(rupees, paise)
+            )
+
+            print("Amount Deposited Successfully")
+
+        case 3:
+
+            if bank is None:
+                print("Create Account First")
+                continue
+
+            rupees = int(input("Enter Withdraw Rupees: "))
+            paise = int(input("Enter Withdraw Paise: "))
+
+            bank.withdraw(
+                Currency(rupees, paise)
+            )
+
+        case 4:
+
+            if bank is None:
+                print("Create Account First")
+                continue
+
+            print("\n===== ACCOUNT DETAILS =====")
+            print(bank)
+
+        case 5:
+
+            print("Program Ended")
+            break
+
+        case _:
+
+            print("Invalid Choice")
+
+# holder = AccountHolder(
+#     "Shubham",
+#     24,
+#     "Varanasi",
+#     "9022151378",
+#     "Cashier"
+# )
+
+# currency = Currency(10,15)
+
+# bank = SavingAccount(
+#     holder,
+#     "123456789",
+#     7,
+#     currency,
+#     "Saving Account"
+# )
+
+# bank.deposit(Currency(10, 85))
 # print(bank)
-
-bank.withdraw(Currency(60, 25))
-print(bank)
