@@ -18,6 +18,32 @@ class AccountHolder(Person):
 
     def __str__(self):
         return super().__str__() + f"\nProfession: {self.profession}"
+
+class BankAccount:
+    def __init__(self, customer,account_num,rt_of_intrest,balance):
+        self.customer = customer
+        self.account_num = account_num
+        self.rt_of_intrest = rt_of_intrest
+        self.balance = balance
+   
+        
     
-ah = AccountHolder("shubham",24, "Varanasi", "9022151378","Cassier")    
-print(ah)
+    def __str__(self):
+        return  f"{self.customer}\nAccont Number: {self.account_num}\nRate of intrest: {self.rt_of_intrest}\nBalance: {self.balance}"
+    
+holder = AccountHolder(
+    "Shubham",
+    24,
+    "Varanasi",
+    "9022151378",
+    "Cashier"
+)
+
+bank = BankAccount(
+    holder,
+    "123456789",
+    7,
+    50000
+)
+
+print(bank)
